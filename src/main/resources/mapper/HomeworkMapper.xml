@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pan.dao.HomeworkMapper">
+    <insert id="insertHomework" parameterType="com.pan.bean.Homework">
+        insert into tbl_hwk (hwk_id, s_id, t_id, question, answer, hwk_grd) values (#{hwkId}, #{sId}, #{tId} ,#{question}, #{answer}, #{hwkGrd});  
+    </insert>
+
+    <update id="updateHomeworkAnswer">
+        update tbl_hwk set answer = #{answer} where s_id = #{sId} and hwk_id = #{hwkId} and is_deleted = 0;
+    </update>
+    <update id="updateHwkGrd">
+        update tbl_hwk set hwk_grd = #{hwkGrd} where s_id = #{sId} and hwk_id = #{hwkId} and is_deleted = 0;
+    </update>
+    <!--<delete id="deleteHwk">-->
+    <!--delete from tbl_hwk where hwk_id = #{hwkId};-->
+    <!--</delete>-->
+    <update id="deleteHwk">
+        update tbl_hwk set is_deleted = 1 where hwk_id = #{hwkId};
+    </update>
+
+    <select id="queryHomework" resultType="com.pan.bean.Homework">
+        select * from tbl_hwk where s_id = #{sId} and is_deleted = 0; 
+    </select>
+    <select id="queryDistinctHomework" resultType="com.pan.bean.Homework">
+        select distinct hwk_id, question from tbl_hwk where t_id = #{tId} and is_deleted = 0;
+    </select>
+    <select id="queryMaxHwkId" resultType="java.lang.Integer">
+        select max(hwk_id) from tbl_hwk;
+    </select>
+    <select id="queryHomeworkBySIdAndHwkId" resultType="com.pan.bean.Homework">
+        select * from tbl_hwk where s_id = #{sId} and hwk_id = #{hwkId} and is_deleted = 0;
+    </select>
+    <select id="queryDistinctHomeworkStu" resultType="com.pan.bean.Homework">
+        select distinct hwk_id, question from tbl_hwk where is_deleted = 0;
+    </select>
+    <select id="queryHomeworkBySIdAndTId" resultType="com.pan.bean.Homework">
+        select * from tbl_hwk where s_id = #{sId} and t_id = #{tId} and is_deleted = 0; 
+    </select>
+</mapper>

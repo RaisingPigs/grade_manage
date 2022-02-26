@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pan.dao.TeacherMapper">
+  <resultMap id="BaseResultMap" type="com.pan.bean.Teacher">
+    <id column="tch_id" jdbcType="INTEGER" property="tchId" />
+    <result column="tch_name" jdbcType="VARCHAR" property="tchName" />
+    <result column="tch_sex" jdbcType="CHAR" property="tchSex" />
+    <result column="tch_age" jdbcType="INTEGER" property="tchAge" />
+    <result column="tch_class" jdbcType="INTEGER" property="tchClass" />
+    <result column="c_name" jdbcType="VARCHAR" property="cName" />
+    <result column="tch_pwd" jdbcType="VARCHAR" property="tchPwd" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    tch_id, tch_name, tch_sex, tch_age, tch_class, c_name, tch_pwd
+  </sql>
+  <select id="selectByExample" parameterType="com.pan.bean.TeacherExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tbl_tch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_tch
+    where tch_id = #{tchId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_tch
+    where tch_id = #{tchId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pan.bean.TeacherExample">
+    delete from tbl_tch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pan.bean.Teacher">
+    insert into tbl_tch (tch_id, tch_name, tch_sex, 
+      tch_age, tch_class, c_name, 
+      tch_pwd)
+    values (#{tchId,jdbcType=INTEGER}, #{tchName,jdbcType=VARCHAR}, #{tchSex,jdbcType=CHAR}, 
+      #{tchAge,jdbcType=INTEGER}, #{tchClass,jdbcType=INTEGER}, #{cName,jdbcType=VARCHAR}, 
+      #{tchPwd,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pan.bean.Teacher">
+    insert into tbl_tch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tchId != null">
+        tch_id,
+      </if>
+      <if test="tchName != null">
+        tch_name,
+      </if>
+      <if test="tchSex != null">
+        tch_sex,
+      </if>
+      <if test="tchAge != null">
+        tch_age,
+      </if>
+      <if test="tchClass != null">
+        tch_class,
+      </if>
+      <if test="cName != null">
+        c_name,
+      </if>
+      <if test="tchPwd != null">
+        tch_pwd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tchId != null">
+        #{tchId,jdbcType=INTEGER},
+      </if>
+      <if test="tchName != null">
+        #{tchName,jdbcType=VARCHAR},
+      </if>
+      <if test="tchSex != null">
+        #{tchSex,jdbcType=CHAR},
+      </if>
+      <if test="tchAge != null">
+        #{tchAge,jdbcType=INTEGER},
+      </if>
+      <if test="tchClass != null">
+        #{tchClass,jdbcType=INTEGER},
+      </if>
+      <if test="cName != null">
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="tchPwd != null">
+        #{tchPwd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pan.bean.TeacherExample" resultType="java.lang.Long">
+    select count(*) from tbl_tch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tbl_tch
+    <set>
+      <if test="record.tchId != null">
+        tch_id = #{record.tchId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tchName != null">
+        tch_name = #{record.tchName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tchSex != null">
+        tch_sex = #{record.tchSex,jdbcType=CHAR},
+      </if>
+      <if test="record.tchAge != null">
+        tch_age = #{record.tchAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.tchClass != null">
+        tch_class = #{record.tchClass,jdbcType=INTEGER},
+      </if>
+      <if test="record.cName != null">
+        c_name = #{record.cName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tchPwd != null">
+        tch_pwd = #{record.tchPwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tbl_tch
+    set tch_id = #{record.tchId,jdbcType=INTEGER},
+      tch_name = #{record.tchName,jdbcType=VARCHAR},
+      tch_sex = #{record.tchSex,jdbcType=CHAR},
+      tch_age = #{record.tchAge,jdbcType=INTEGER},
+      tch_class = #{record.tchClass,jdbcType=INTEGER},
+      c_name = #{record.cName,jdbcType=VARCHAR},
+      tch_pwd = #{record.tchPwd,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pan.bean.Teacher">
+    update tbl_tch
+    <set>
+      <if test="tchName != null">
+        tch_name = #{tchName,jdbcType=VARCHAR},
+      </if>
+      <if test="tchSex != null">
+        tch_sex = #{tchSex,jdbcType=CHAR},
+      </if>
+      <if test="tchAge != null">
+        tch_age = #{tchAge,jdbcType=INTEGER},
+      </if>
+      <if test="tchClass != null">
+        tch_class = #{tchClass,jdbcType=INTEGER},
+      </if>
+      <if test="cName != null">
+        c_name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="tchPwd != null">
+        tch_pwd = #{tchPwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tch_id = #{tchId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pan.bean.Teacher">
+    update tbl_tch
+    set tch_name = #{tchName,jdbcType=VARCHAR},
+      tch_sex = #{tchSex,jdbcType=CHAR},
+      tch_age = #{tchAge,jdbcType=INTEGER},
+      tch_class = #{tchClass,jdbcType=INTEGER},
+      c_name = #{cName,jdbcType=VARCHAR},
+      tch_pwd = #{tchPwd,jdbcType=VARCHAR}
+    where tch_id = #{tchId,jdbcType=INTEGER}
+  </update>
+</mapper>

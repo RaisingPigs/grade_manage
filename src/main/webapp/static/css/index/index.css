@@ -1,0 +1,99 @@
+body {
+    font-family: 'Microsoft YaHei';
+}
+
+/*整个导航条*/
+.navbar-default {
+    /*透明灰*/
+    /*background: rgba(0, 0, 0, 0.7);*/
+    background: #ffffff;
+    border: none;
+    box-shadow: 0 2px 8px 0 rgba(50, 50, 50, 0.25);
+}
+
+/*学生管理系统文字*/
+.navbar-default .navbar-brand {
+    font-size: 30px;
+    font-weight: bold;
+    color: #40D2B1;
+    height: 70px;
+    line-height: 35px;
+}
+
+.navbar-default .navbar-brand {
+    transition: 1s;
+}
+
+.navbar-default .navbar-brand:hover {
+    background: linear-gradient(to right, #30c0ff, #ff9ed1);
+    -webkit-background-clip: text;
+    font-size: 2.5em;
+    color: transparent;
+}
+
+/*ul > li文字*/
+.navbar-default .navbar-nav > li > a {
+    font-size: 16px;
+    font-weight: bold;
+    color: #666;
+    height: 70px;
+    line-height: 35px;
+    transition: 1s;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    font-size: 17px;
+    text-shadow: 0 0 25px teal;
+}
+
+#home_login {
+    font-size: 17px;
+    text-shadow: 0 0 15px teal;
+    color: #333;
+}
+
+#login {
+    color: dodgerblue;
+}
+
+#login:hover {
+    color: #2398ff;
+    text-shadow: 0 0 25px darkgrey;
+}
+
+#home {
+    width: 100%;
+    height: 100%;
+}
+
+/*轮播图*/
+.banner {
+    width: 100%;
+    /*height: 60%;*/
+    margin: 71px auto 0px;
+}
+
+.banner > .imgs > a > img {
+    width: 100%;
+    height: 100%;
+}
+
+/*轮播图底下的未选中的点*/
+.swiper-pagination-bullet {
+    background: white;
+    opacity: .5;
+}
+
+/*轮播图底下的被选中的点*/
+.swiper-pagination-bullet-active {
+    background: dimgray;
+    transform: scale(1.5, 1.5);
+    opacity: .5;
+}
+
+/*前进后退箭头*/
+.swiper-button-next, .swiper-button-prev {
+    width: 2%;
+    height: 6%;
+    margin: 0px 2%;
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pan.dao.GradePercentMapper">
+
+    <select id="getGradePercentByTId" resultType="com.pan.bean.GradePercent">
+        select * from grd_pct where t_id = 111111;
+    </select>
+
+    <update id="updateGradePercent" parameterType="com.pan.bean.GradePercent">
+        update grd_pct set usual_grd = ${usualGrd}, exam_grd = ${examGrd}, expr_grd = ${exprGrd} where t_id = 111111;
+      
+    </update>
+
+</mapper>

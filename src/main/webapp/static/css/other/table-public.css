@@ -1,0 +1,48 @@
+body {
+    font-family: 'Microsoft YaHei';
+    padding-top: 90px;
+}
+
+.my-page-info {
+    width: 60%;
+    border-radius: 15px;
+    margin: auto;
+}
+
+.tooltip-inner {
+    background-color: #ff172f !important;
+    color: #fff;
+}
+
+.tooltip.top .tooltip-arrow {
+    border-top-color: #ff172f;
+}
+
+.tooltip.right .tooltip-arrow {
+    border-right-color: #ff172f;
+}
+
+.tooltip.bottom .tooltip-arrow {
+    border-bottom-color: #ff172f;
+}
+
+.tooltip.left .tooltip-arrow {
+    border-left-color: #ff172f;
+}
+
+.my-search-div {
+    margin-bottom: 15px;
+}
+
+.my-alert {
+    width: 800px;
+    position: absolute;
+    top: 35%;
+    left: 25%;
+    z-index: 20;
+    display: none;
+}
+
+.my-alert-nav {
+    font-size: 24px;
+}

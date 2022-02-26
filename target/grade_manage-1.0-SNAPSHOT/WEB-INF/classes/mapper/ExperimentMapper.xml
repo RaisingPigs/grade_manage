@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pan.dao.ExperimentMapper">
+    <insert id="insertExperiment" parameterType="com.pan.bean.Experiment">
+        insert into tbl_expr (expr_id, s_id, t_id, question, answer, expr_grd) values (#{exprId}, #{sId}, #{tId}, #{question}, #{answer}, #{exprGrd});
+    </insert>
+    <!--<delete id="deleteExperiment">-->
+    <!--delete from tbl_expr where expr_id = #{exprId}-->
+    <!--</delete>-->
+    <update id="deleteExperiment">
+          update tbl_expr set is_deleted = 1 where expr_id = #{exprId};
+    </update>
+
+    <update id="updateExperimentAnswer" parameterType="com.pan.bean.Experiment">
+        update tbl_expr set answer = #{answer} where s_id = #{sId} and expr_id = #{exprId} and is_deleted = 0;
+    </update>
+    <update id="updateExperimentGrade">
+        update tbl_expr set expr_grd = #{exprGrd} where s_id = #{sId} and expr_id = #{exprId}  and is_deleted = 0;
+    </update>
+    <select id="queryExperimentBysId" resultType="com.pan.bean.Experiment">
+        select * from tbl_expr where s_id = #{sId} and is_deleted = 0;
+    </select>
+    <select id="queryExperimentBySIdAndExprId" resultType="com.pan.bean.Experiment">
+        select * from tbl_expr where s_id = #{sId} and expr_id = #{exprId} and is_deleted = 0;
+    </select>
+    <select id="queryAllExperiments" resultType="com.pan.bean.Experiment">
+        select * from tbl_expr where is_deleted = 0;
+    </select>
+    <select id="queryMaxExprId" resultType="java.lang.Integer">
+        select max(expr_id) from tbl_expr;
+    </select>
+    <select id="queryDistinctExpr" resultType="com.pan.bean.Experiment">
+        select distinct expr_id, question from tbl_expr where t_id = ${tId} and is_deleted = 0;
+    </select>
+    <select id="queryDistinctExprStu" resultType="com.pan.bean.Experiment">
+        select distinct expr_id, question from tbl_expr where  is_deleted = 0;
+    </select>
+    <select id="queryExperimentBysIdAndTId" resultType="com.pan.bean.Experiment">
+         select * from tbl_expr where s_id = #{sId} and t_id = #{tId} and is_deleted = 0;
+    </select>
+
+
+</mapper>

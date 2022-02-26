@@ -1,0 +1,91 @@
+.common {
+    width: 900px;
+}
+
+.listbox {
+    float: left;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    /*display: inline;*/
+    padding: 10px;
+    background: #eee;
+    border-radius: 10px;
+}
+
+.listimg {
+    width: 260px;
+    height: 165px;
+    float: left;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 14px;
+    border-radius: 8px;
+}
+
+.listimg img {
+    width: 260px;
+    height: 165px;
+    background: #333333;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 1s;
+}
+
+.listimg img:hover {
+    width: 280px;
+    height: 185px;
+}
+
+.summary {
+    width: 260px;
+    height: 165px;
+    color: darkgray;
+    background: #333333;
+    position: absolute;
+    top: 169px;
+    left: 0;
+}
+
+.summary-txt {
+    width: 250px;
+    height: auto;
+    margin: 5px 10px;
+    line-height: 22px;
+    font-size: 12px;
+}
+
+.list-info, a {
+    color: dimgray;
+    font-size: 14px;
+}
+
+.list-title > a {
+    color: #000;
+}
+
+.list-info span {
+    margin-right: 4px;
+    font-size: 14px;
+}
+
+.list-tag span {
+    font-size: 18px;
+}
+
+.list-date {
+    margin-left: 3px;
+}
+
+.list-date,
+.list-view,
+.list-comment,
+.list-demo {
+    float: left;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.list-tag > a {
+    margin-right: 8px;
+}

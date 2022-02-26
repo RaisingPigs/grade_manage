@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pan.dao.GradeMapper">
+    <resultMap id="BaseResultMap" type="com.pan.bean.Grade">
+        <result column="s_id" jdbcType="INTEGER" property="sId"/>
+        <result column="java" jdbcType="INTEGER" property="java"/>
+        <result column="c" jdbcType="INTEGER" property="c"/>
+        <result column="cpp" jdbcType="INTEGER" property="cpp"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    s_id, java, c, cpp
+  </sql>
+    
+    <update id="updateGradeByStuId" parameterType="com.pan.bean.Grade">
+    update tbl_grd set java = ${java}, c = ${c}, cpp = ${cpp} where s_id = ${sId};
+  </update>
+
+    <select id="getGrade" resultType="com.pan.bean.Grade">
+        select * from tbl_grd where s_id = ${sId};
+    </select>
+
+    <select id="selectByExample" parameterType="com.pan.bean.GradeExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from tbl_grd
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <delete id="deleteByExample" parameterType="com.pan.bean.GradeExample">
+        delete from tbl_grd
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.pan.bean.Grade">
+    insert into tbl_grd (s_id, java, c, 
+      cpp)
+    values (#{sId,jdbcType=INTEGER}, #{java,jdbcType=INTEGER}, #{c,jdbcType=INTEGER}, 
+      #{cpp,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.pan.bean.Grade">
+        insert into tbl_grd
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sId != null">
+                s_id,
+            </if>
+            <if test="java != null">
+                java,
+            </if>
+            <if test="c != null">
+                c,
+            </if>
+            <if test="cpp != null">
+                cpp,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sId != null">
+                #{sId,jdbcType=INTEGER},
+            </if>
+            <if test="java != null">
+                #{java,jdbcType=INTEGER},
+            </if>
+            <if test="c != null">
+                #{c,jdbcType=INTEGER},
+            </if>
+            <if test="cpp != null">
+                #{cpp,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.pan.bean.GradeExample" resultType="java.lang.Long">
+        select count(*) from tbl_grd
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update tbl_grd
+        <set>
+            <if test="record.sId != null">
+                s_id = #{record.sId,jdbcType=INTEGER},
+            </if>
+            <if test="record.java != null">
+                java = #{record.java,jdbcType=INTEGER},
+            </if>
+            <if test="record.c != null">
+                c = #{record.c,jdbcType=INTEGER},
+            </if>
+            <if test="record.cpp != null">
+                cpp = #{record.cpp,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update tbl_grd
+        set s_id = #{record.sId,jdbcType=INTEGER},
+        java = #{record.java,jdbcType=INTEGER},
+        c = #{record.c,jdbcType=INTEGER},
+        cpp = #{record.cpp,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateJavaGradeBySId">
+        update tbl_grd set java = #{java} where s_id = #{sId};
+    </update>
+    <update id="updateCGradeBySId">
+        update tbl_grd set c = #{java} where s_id = #{sId};
+    </update>
+    <update id="updateCPPGradeBySId">
+        update tbl_grd set cpp = #{java} where s_id = #{sId};
+    </update>
+</mapper>
